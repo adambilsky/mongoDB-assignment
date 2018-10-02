@@ -39,10 +39,39 @@ mongoose.connect(//"name of server here"//
 // A GET route for scraping the ... site
 app.get("/scrape", function(req, res) {
     // get body of html
-    .then(function(result) {
+    .then(function(response) {
+    //changed result to response
         // pass result to cheerio
-        var $ = cheerio.load(result.data);
+        var $ = cheerio.load(response.data);
 
-        // then grab specific tags (h2, h4, etc) and save as object
-    }
-})
+        // then grab specific element tags (in this case, 'a' tags because we are scraping links) and save as object
+        // we use ".each()" instead of a "for loop" 
+        $("").each(function(i, element) {
+            // start with an empty object
+            var result = {};
+
+            // then add the info from each link as a property 
+            // each title is the "text" child of each "a" tag (hyperlink)
+            result.title = $(this)
+                .children("a")
+                .text();
+            // each link is the "href" attribute of the link
+            result.link = $(this)
+                .children("a")
+                .attr('href');
+
+            // NOW, we create a new Article using the "result" object above just built, using the models
+            db.Article.create(result)
+                .then(function(dbArticle) {
+                    console.log(dbArticle);
+                })
+                .catch(function(err) {
+                    // send errors back to client
+                    return res.json(err);
+                });
+        });
+        
+        // Display if successful
+        res.send("Scrape successful");
+    });
+});
