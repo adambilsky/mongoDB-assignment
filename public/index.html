@@ -12,102 +12,29 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1 class="display-4 text-center">News Scraper</h1>
-                <p class="lead text-center">Use the search criteria below to find what you're looking for.</p>
             </div>
         </div>
 
         <form>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Search Term</label>
-                <input type="text" class="form-control" id="searchTerm" placeholder="search">
-                <!-- <input is = "addSearchTerm" type = "submit" value ="Search Term"> -->
-            </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Form 1</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>xxx</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Form 2</label>
-                <input type="text" class="form-control" id="startYear" placeholder="search">
-            </div>
-
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Form 2</label>
-                <input type="text" class="form-control" id="endYear" placeholder="search">
-            </div>
-
-            <button type="button" class="btn btn-primary" id="searchButton" value="Search Term">Search</button>
-            <button type="button" class="btn btn-secondary" id="clearResults">Clear Results</button>
         </form>
         
         <div id="display-window">
             <br>
             <div id="results-display">
-
+                <table>
+                    <tr>
+                      <th>Header1</th>
+                      <th>Header2</th>
+                      <th>Header3</th>
+                    </tr>
+                    <tr>
+                        <!-- API search data appended here with js -->
+                    </tr>
+                  </table>
             </div>
         </div>
     </div>
 
-    <!-- NYT API must change -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var q;
-
-            // Capture search term to send to API
-            $("#searchButton").on("click", function (event) {
-                event.preventDefault();
-                $("#results-display").empty();
-                q = $("#searchTerm").val().trim();
-                console.log(q);
-
-                // NYTimes API
-                var beginDate;
-                var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-                url += '?' + $.param({
-                    'api-key': "e747bb21e9864e7795fd518abd46f164",
-                    'q': q,
-                });
-                $.ajax({
-                    url: url,
-                    method: 'GET',
-                }).done(function (result) {
-                    console.log(result);
-                    var artResult = result.response.docs;
-                    // headlineDisplay = $("#results-display").html("<br>" + "<a href = '" + articleURL + "'>" + headline + "</a>");
-
-                    // write a function (then wrap a loop around it) to collect the article title and URL and display them in the empty div
-                    for (i = 0; i < artResult.length; i++) {
-                        headline = artResult[i].headline.main;
-                        console.log(headline);
-
-                        articleURL = artResult[i].web_url;
-                        console.log(articleURL);
-
-                        var showHeadline = $("<a>");
-                        articleDiv = $("<div>");
-                        artLink = $("<a href = '" + articleURL + "'>" + headline + "</a>");
-                        articleDiv.append(artLink);
-                        // articleDiv.append()
-                        $("#results-display").append(articleDiv);
-                        // $("#results-display").append("<a href = '" + articleURL + "'>" + headline + "</a>");
-                        // $("#display-window").prepend(headlineDisplay);
-
-                    }
-                });
-            });
-            $("#clearResults").on("click", function (event) {
-                event.preventDefault();
-                artResult = "";
-                $("#results-display").empty();
-                $("#searchTerm").val("");
-            });
-
-        })
-    </script>
 </body>
 
 </html>
