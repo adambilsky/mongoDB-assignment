@@ -8,6 +8,7 @@ var mongoose = require("mongoose");
 
 // Second, the scraping tools
 // var axios = require("axios") <-- research docs
+// var fetch = require("fetch") <-- research per Ron
 var cheerio = require("cheerio");
 
 // Third, our models from the models folder (at the same level)
@@ -21,6 +22,7 @@ var app = express();
 
 // *** Middleware goes here ***
 // logger
+app.use(logger("dev"))
 
 // body-parser for forms
 app.use(bodyParser.urlencoded);
@@ -44,7 +46,7 @@ app.get("/scrape", function(req, res) {
         // pass result to cheerio
         var $ = cheerio.load(response.data);
 
-        // then grab specific element tags (in this case, 'a' tags because we are scraping links) and save as object
+        // then grab specific element tags (we are using 'a' to grab link titles) and save as object
         // we use ".each()" instead of a "for loop" 
         $("").each(function(i, element) {
             // start with an empty object
