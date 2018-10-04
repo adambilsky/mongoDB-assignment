@@ -34,8 +34,9 @@ app.use(express.static("public"));
 
 // Connect to Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(//"name of server here"//
-);
+mongoose.connect("mongodb://localhost/scraperdb", {
+    useMongoClient: true
+})
 
 // Routes
 
