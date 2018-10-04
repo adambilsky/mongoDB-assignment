@@ -1,8 +1,6 @@
 # mongoDB-assignment
 NU Bootcamp Week 18 assigment
 
-First, figure out how to delete node_modules - it was in the gitignore folder (complete)
-
 This assignment will allow the user to scrape titles of and links to news headlines, store or delete them as favorites, and add notes to each.
 
 MongoDB will store the data, rather than a local array (cf NYT News Scraper).
