@@ -79,3 +79,38 @@ app.get("/scrape", function(req, res) {
         res.send("Scrape successful");
     });
 });
+
+// Next, a route for getting all the articles in the scraperdb
+
+    // First get all the documents in the Articles "collection"
+
+    // If successful, send them back to the client
+
+    // Send any errors that occurred
+
+// Route for Articles by id to include the note
+
+    // Build a query using the id param to match the one in scraperdb
+
+      // use the "populate" method to include all notes
+
+        // Send back a successful get to the client
+
+        // Send back any errors
+
+
+// Route for saving/updating notes (use the specific id as the route)
+
+  // Create a new note and pass the body
+
+    // Since the query normally returns the original id, we need to update it with a { new: true } param using findOneAndUpdate
+    
+    // Once we update/find the new Article, send it to the client
+    
+    // Send back any errors
+
+
+// Start the server
+app.listen(PORT, function() {
+    console.log(`App running on port ${PORT}!`)
+})
