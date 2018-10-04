@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>News Scraper With Mongoose</title>
-    <link rel = "stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
@@ -16,26 +16,16 @@
             </div>
         </div>
 
-        <form>
-        </form>
-        
-        <div id="display-window">
-            <br>
-            <div id="results-display">
-                <table>
-                    <tr>
-                      <th>Header1</th>
-                      <th>Header2</th>
-                      <th>Header3</th>
-                    </tr>
-                    <tr>
-                        <!-- API search data appended here with js -->
-                    </tr>
-                  </table>
-            </div>
+        <div>
+            <button id = "scrape">Click to Scrape</button>
+        </div>
+
+        <div id="display">
+            <div id = "articles"></div>
+            <div id = "notes"></div>
         </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>
 </body>
 

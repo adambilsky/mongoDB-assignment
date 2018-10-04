@@ -12,6 +12,7 @@ var mongoose = require("mongoose");
 var cheerio = require("cheerio");
 
 // Third, our models from the models folder (at the same level)
+// This should grab ALL the model files, instead of requiring them one at a time
 var db = require("./models");
 
 // declare our port
