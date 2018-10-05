@@ -33,10 +33,12 @@ app.use(bodyParser.urlencoded);
 app.use(express.static("public"));
 
 // Connect to Mongo DB
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraperdb";
+
+
 mongoose.Promise = Promise;
 // per message from server: "(node:53741) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version."
-mongoose.connect("mongodb://localhost/scraperdb", { useNewUrlParser: true }
-);
+mongoose.connect(MONGODB_URI);
 
 // Routes
 // A GET (scraping) route for scraping the ... site
