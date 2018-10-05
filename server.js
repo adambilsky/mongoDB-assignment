@@ -3,7 +3,7 @@
 
 var express = require("express");
 var bodyParser = require("body-parser");
-var logger = require("morgan") // research docs on this
+// var logger = require("morgan") // research docs on this
 var mongoose = require("mongoose");
 
 // Second, the scraping tools
@@ -23,7 +23,7 @@ var app = express();
 
 // *** Middleware goes here ***
 // logger
-app.use(logger("dev"))
+// app.use(logger("dev"))
 
 // body-parser for forms
 app.use(bodyParser.urlencoded);
@@ -34,14 +34,15 @@ app.use(express.static("public"));
 
 // Connect to Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/scraperdb", {
-    useMongoClient: true
-})
+// per message from server: "(node:53741) DeprecationWarning: current URL string parser is deprecated, and will be removed in a future version."
+mongoose.connect("mongodb://localhost/scraperdb", { useNewUrlParser: true }
+);
 
 // Routes
-
-// A GET route for scraping the ... site
+// A GET (scraping) route for scraping the ... site
 app.get("/scrape", function (req, res) {
+    // use axios to grab the body of the target HTML
+    axios.get("https://old.reddit.com/r/webdev/")
     // get body of html
     .then(function (response) {
         //changed result to response
@@ -50,7 +51,7 @@ app.get("/scrape", function (req, res) {
 
         // then grab specific element tags (we are using 'a' to grab link titles) and save as object
         // we use ".each()" instead of a "for loop" 
-        $("").each(function (i, element) {
+        $("p.title").each(function (i, element) {
             // start with an empty object
             var result = {};
 
@@ -62,7 +63,7 @@ app.get("/scrape", function (req, res) {
             // each link is the "href" attribute of the link
             result.link = $(this)
                 .children("a")
-                .attr('href');
+                .attr("href");
 
             // NOW, we create a new Article using the "result" object above just built, using the models
             db.Article.create(result)
