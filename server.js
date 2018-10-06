@@ -35,12 +35,14 @@ const config = require("./config/database");
 mongoose.Promise = Promise;
 mongoose.connect(config.database);
 
-// Routes
-// A GET (scraping) route for scraping the ... site
+// *** Routes ***
+// Home route
 app.get('/', function(req, res) {
     console.log('here');
     res.send('hello')
 })
+
+// A GET (scraping) route for scraping the reddit webdev site
 app.get("/scrape", function (req, res) {
     console.log("The scrape route works");
     // use axios to grab the body of the target HTML
@@ -66,7 +68,8 @@ app.get("/scrape", function (req, res) {
             result.link = $(this)
                 .children("a")
                 .attr("href");
-            // console.log(result);
+            console.log(result); // this successfully logs the article objects. they also appear in the db 
+            // once they have been scraped, however, they will result in errors if they are not cleared before rescraping...
 
             // NOW, we create a new Article using the "result" object above just built, using the models
             // the articles appear in the db as of 5:00 PM, Saturday 10/6
@@ -89,7 +92,7 @@ app.get("/scrape", function (req, res) {
 app.get("/articles", function (req, res) {
 
     // First get all the documents in the Articles "collection"
-    db.Article.findOneAndUpdate({})
+    db.Article.find({})
         .then(function (dbArticle) {
             // If successful, send them back to the client
             res.json(dbArticle);
