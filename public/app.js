@@ -29,13 +29,13 @@ $(document).on("click", "p", function () {
             // $("#notes").append("<h2>" + data.title + "</h2>");
 
             // new title input
-            $("#notes").append("<input id='title-input' name='title' >");
+            $("#notes").append(`<button data-id= ${data._id} id='save-article' name='save'>Save</button>`);
 
             // new note input
-            $("#notes").append("textarea id='body-input' name='body'></textarea>");
+            $("#notes").append(`<textarea id='body-input' name='body'></textarea>`);
 
             // submit note button
-            $("#notes").append(`button data-id= ${data._id} id='save-note'>Save Note</button>`);
+            $("#notes").append(`<button data-id= ${data._id} id='save-note'>Save Note</button>`);
 
             // If the article has a note 
             if (data.note) {
