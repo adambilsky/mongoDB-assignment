@@ -7,7 +7,7 @@ $.getJSON("/articles", function(data) {
 // Capture <p> tag clicks
 $(document).on("click", "p", function() {
     // Clear the notes section
-    $("#notes").emtpy();
+    $("#notes").empty();
 
     // Save the p tag id
     var thisId = $(this).attr("data-id");

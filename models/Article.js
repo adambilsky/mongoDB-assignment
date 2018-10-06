@@ -1,21 +1,26 @@
 // Require mongoose
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 // Get a reference to the mongoose Schema constructor
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // Create a model schema to grab articles
 // The schema will have three objects: 'title', 'link', and 'note'
+// adding boolean for "saved"
 // which each carry two key-value pairs
 
-var ArticleSchema = new Schema({
+const ArticleSchema = new Schema({
     title: {
         type: String,
-        required: true
+        unique: true
     },
     link: {
         type: String,
-        required: true
+        unique: true
+    },
+    saved: {
+        type: Boolean,
+        default: false
     },
     // 'note' holds the Note id
     // we use it to populate the Article with a Note
@@ -26,7 +31,7 @@ var ArticleSchema = new Schema({
 });
 
 // Create the model from the above schema, using mongoose's model method
-var Article = mongoose.model("Article", ArticleSchema);
+const Article = mongoose.model("Article", ArticleSchema);
 
 // Export the Article model
 module.exports = Article;
