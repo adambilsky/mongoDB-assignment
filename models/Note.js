@@ -4,9 +4,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create a new NoteSchema object (using this constructor)
-// Set both items in the object to be strings
+// Set one to string, the other to Boolean
 const NoteSchema = new Schema({
-  note: String
+  body: String,
+  saved: Boolean
 });
 
 // Create our model from the above schema

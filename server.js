@@ -123,13 +123,13 @@ app.get("/articles/:id", function (req, res) {
 
 // Route for saving/updating notes (use the specific id as the route)
 app.post("/articles/:id", function (req, res) {
-
+    console.log(req.body);
     // Create a new note and pass the body
     db.Note.create(req.body)
         .then(function (dbNote) {
-
+            console.log(dbNote);
             // Since the query normally returns the original id, we need to update it with a { new: true } param using findOneAndUpdate
-            return db.Article.findOneAndUpdate({ _id: requ.params.id }, { note: dbNote._id }, { new: true });
+            return db.Article.findOneAndUpdate({ _id: req.params.id }, { $push: { note: dbNote._id }}, { new: true });
         })
         // Once we update/find the new Article, send it to the client
         .then(function (dbArticle) {
